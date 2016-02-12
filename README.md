@@ -1,13 +1,27 @@
 # prior-motion-reconstruction-CT
-This repository contains data, code and results for prior- and motion-based reconstruction (PRIMOR) method for respiratory gated CT presented in the paper: 
-**“A novel prior- and motion-based compressed sensing methods for small-animal respiratory gated CT”. J F P J Abascal, M Abella, E Marinetto, J Pascau, and M Desco.** 
-DOI: 
+This repository contains data, code and results for prior- and motion-based reconstruction (PRIMOR) method for respiratory gated CT presented in the paper **A novel prior- and motion-based compressed sensing methods for small-animal respiratory gated CT. JFPJ Abascal, M Abella, E Marinetto, J Pascau, and M Desco. Plos One, 2016 (in press). ** DOI: 
 
-Small-animal respiratory gated-CT data used in this work is available from http://dx.doi.org/10.5281/zenodo.15685. 
+We propose a novel method, PRIMOR, that extends prior-based reconstruction (PBR) method by including a model of the motion between gates. Motion is estimated using a nonrigid registration method based on hierarchical B-splines. PRIMOR minimizes 
 
-We provide videos of reconstructed images with FDK, prior-based reconstruction (PBR) and prior- and motion-based reconstruction (PRIMOR) for the different scenarios created by changing photon flux (low dose protocols) and number of projections (subsumpled scenarios)
+![](https://github.com/HGGM-LIM/prior-motion-reconstruction-CT/blob/master/PRIMOR_equation.jpg)
+
+where Psi is the spatial gradient, which leads to TV, Phi is the wavelet transform, T is the temporal operator, F is the Radon transform, up is the prior image and v is the image variation with respect to the prior image. 
+
+## Data 
+Methods are assessed using small-animal respiratory gated-CT data. In this case data is sorted among four respiratory gates, leading to few noisy irregularly distributed projections. Data for the different scenarios used in the paper can be found at http://dx.doi.org/10.5281/zenodo.15685 
+
+## Code
+We provide MATLAB code for PBR and PRIMOR methods. A demo loads small-animal respiratory gated-CT data and reconstructed images and display results. To run PBR and PRIMOR methods you need the following packages: 
+
+* IRT package: Simulated data and forward and backprojection operators have been computed using IRT code (J A Fessler, Image reconstruction toolbox [IRT], 2011, retrieved from <http://www.eecs.umich.edu/~fessler/code/index.html>).   
+ 
+* Wavelab 850: Package for wavelet transform computation (Buckheit JB, Chen S, Donoho DL, Johnstone IM, Scargle JD. WaveLab. Reference Manual. ftp://playfair.stanford.edu/pub/wavelab/WaveLabRef.ps. 1995., retrieved from http://statweb.stanford.edu/~wavelab/).
+
+* FFD-based registration package: For the motion estimation step we used the FFD-based registration package available in MATLAB Central (Dirk-Jan Kroon; B-spline grid,  image and point based registration; 2012, retrieved from http://www.mathworks.com/matlabcentral/fileexchange/20057-b-spline-grid-image-and-point-based-registration), 
+
 
 ## Summary of results ##
+We provide videos of reconstructed images with FDK, prior-based reconstruction (PBR) and prior- and motion-based reconstruction (PRIMOR) for the different scenarios created by changing photon flux (low dose protocols) and number of projections (subsumpled scenarios)
 
 -**Static protocol** (120 projections per gate, I0 where I0=4.5e4) reconstructed with PBR (left) and PRIMOR (right)
 
@@ -57,4 +71,5 @@ We provide videos of reconstructed images with FDK, prior-based reconstruction (
 
 - **ResGat_LowDose_120p_07I0_PRIMOR.gif:** Video of images reconstructed with PRIMOR using a low dose protocol
 
-If you need to contact the author, please do so at mabella (AT) mce (DOT) hggm (DOT) es.
+If you use this code, please reference the publication JFPJ Abascal et al. A novel prior- and motion-based compressed sensing method for small-animal respiratory gated CT. Plos One, 2016 (in press). If you need to contact the author, please do so at mabella@hggm.es, juanabascal78@gmail.com
+
