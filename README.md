@@ -1,23 +1,23 @@
 # prior-motion-reconstruction-CT
-This repository contains data, code and results for prior- and motion-based reconstruction (PRIMOR) method for respiratory gated CT presented in the paper **A novel prior- and motion-based compressed sensing methods for small-animal respiratory gated CT. JFPJ Abascal, M Abella, E Marinetto, J Pascau, and M Desco. Plos One, 2016 (in press). ** DOI: 
+This repository contains data, code and results for prior- and motion-based reconstruction (PRIMOR) method for respiratory gated CT presented in the paper **A novel prior- and motion-based compressed sensing methods for small-animal respiratory gated CT. JFPJ Abascal, M Abella, E Marinetto, J Pascau, and M Desco. Plos One, 2016 (in press).** DOI: 
 
-We propose a novel method, PRIMOR, that extends prior-based reconstruction (PBR) method by including a model of the motion between gates. Motion is estimated using a nonrigid registration method based on hierarchical B-splines. PRIMOR minimizes 
+We propose PRIMOR method that extends prior-based reconstruction (PBR) by including a model of the motion between gates. Motion is estimated using a nonrigid registration method based on hierarchical B-splines. PRIMOR solves 
 
 ![](https://github.com/HGGM-LIM/prior-motion-reconstruction-CT/blob/master/PRIMOR_equation.jpg)
 
 where Psi is the spatial gradient, which leads to TV, Phi is the wavelet transform, T is the temporal operator, F is the Radon transform, up is the prior image and v is the image variation with respect to the prior image. 
 
 ## Data 
-Methods are assessed using small-animal respiratory gated-CT data. In this case data is sorted among four respiratory gates, leading to few noisy irregularly distributed projections. Data for the different scenarios used in the paper can be found at http://dx.doi.org/10.5281/zenodo.15685 
+Methods are assessed using small-animal respiratory gated-CT data. In this case, data is sorted among four respiratory gates, leading to few noisy and irregularly distributed projections. Data for the different scenarios used in the paper can be found at http://dx.doi.org/10.5281/zenodo.15685 
 
 ## Code
 We provide MATLAB code for PBR and PRIMOR methods. A demo loads small-animal respiratory gated-CT data and reconstructed images and display results. To run PBR and PRIMOR methods you need the following packages: 
 
-* IRT package: Simulated data and forward and backprojection operators have been computed using IRT code (J A Fessler, Image reconstruction toolbox [IRT], 2011, retrieved from <http://www.eecs.umich.edu/~fessler/code/index.html>).   
+* IRT package: The image reconstruction toolbox is needed for forward and backprojection operators (J A Fessler, Image reconstruction toolbox [IRT], 2011, retrieved from <http://www.eecs.umich.edu/~fessler/code/index.html>).   
  
 * Wavelab 850: Package for wavelet transform computation (Buckheit JB, Chen S, Donoho DL, Johnstone IM, Scargle JD. WaveLab. Reference Manual. ftp://playfair.stanford.edu/pub/wavelab/WaveLabRef.ps. 1995., retrieved from http://statweb.stanford.edu/~wavelab/).
 
-* FFD-based registration package: For the motion estimation step we used the FFD-based registration package available in MATLAB Central (Dirk-Jan Kroon; B-spline grid,  image and point based registration; 2012, retrieved from http://www.mathworks.com/matlabcentral/fileexchange/20057-b-spline-grid-image-and-point-based-registration), 
+* FFD-based registration package: For the motion estimation step we used the FFD-based registration package available from MATLAB Central (Dirk-Jan Kroon; B-spline grid,  image and point based registration; 2012, retrieved from http://www.mathworks.com/matlabcentral/fileexchange/20057-b-spline-grid-image-and-point-based-registration), 
 
 
 ## Summary of results ##
@@ -42,7 +42,33 @@ We provide videos of reconstructed images with FDK, prior-based reconstruction (
 
 ##  Repository files ##
 
-**The repository contains the following files:**
+The repository contains the following files:
+
+### Data and MATLAB functions ###
+
+- **Demo_PBR_PRIMOR_CT.m:** Demo that laods data and shows how to use PBR and PRIMOR methods 
+
+- **PBR_CT.m:** PBR method
+
+- **PRIMOR_CT.m:** PRIMOR method
+
+- **ComputeSplineRegTwoDirectionsPoolDouble.m** Function to compute the registration between consecutive gates
+
+- **data_I0By6_120p.mat:** Data example corresponding to a low dose protocol (120 projections, I0/6 where I0=4.5e4)
+
+- **image_HighDose.mat:** Image of four respiratory gates for a high dose protocol (four times the standard dose) 
+
+- **RefImage_I0By6_120p.mat:** Prior image computed from the average of all low-dose data 
+
+- **G_linux.mat:** Projection operator from IRT software
+
+- **TParameters_I0By6_120p.mat:** Registration result needed for PRIMOR method
+
+- **FDK_I0By6_120p.mat:** Low-dose data reconstructed with FDK (first gate)
+
+- **PBR_Rec_I0By6_120p.mat:** Low-dose data reconstructed with PBR
+
+- **PRIMOR_Rec_I0By6_120p.mat:** Low-dose data reconstructed with PRIMOR
 
 ### Videos of results ###
 
