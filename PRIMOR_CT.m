@@ -1,7 +1,7 @@
 
 function [u,errAll] = PRIMOR_CT(TParameters,G,f,R,N,uref,mu,lambda,gamma,alpha,beta,nBreg,varargin)
-% u = PBR_CT(G,f,R,N,uref,mu,lambda,alpha,beta,nBreg)
-% [u,errAll] = PBR_CT(G,f,R,N,uref,mu,lambda,alpha,beta,nBreg,uTarget)
+% u = PRIMOR_CT(TParameters,G,f,R,N,uref,mu,lambda,gamma,alpha,beta,nBreg)
+% [u,errAll] = PRIMOR_CT(TParameters,G,f,R,N,uref,mu,lambda,gamma,alpha,beta,nBreg,varargin)
 %
 % Inputs: 
 %
@@ -35,13 +35,16 @@ function [u,errAll] = PRIMOR_CT(TParameters,G,f,R,N,uref,mu,lambda,gamma,alpha,b
 % errAll    = relative solution error norm at each iteration, size nBreg x
 % number of gates
 %
-% Prior- and motion-based reconstruction (PRIMOR) method is efficiently
+% Prior- and motion-based reconstruction (PRIMOR) method efficiently
 % solved using the Split Bregman formulation. It assumes that a good
 % quality (free of artefacts) prior image is available and that there is an
-% estimate of the temporal operator that relates gates, which is computed
-% by a registration between consecutive gates from a previous
-% reconstruction. The linear system in the image reconstruciton step is
-% solved using  Gauss-Newton Krylov method.
+% estimate of the image registration between consecutive gates, which can
+% be obtained from a previous reconstruction. PRIMOR provides additionally
+% a-priori information with respect to previous methods methods, which can
+% be seen by computing abs(OperatorL(uTarget)) and abs(uTarget(:,:,1)-uTarget(:,:,1))   
+% and abs(uTarget(:,:,1)-uref(:,:,1)). The linear system in the image
+% reconstruciton step is solved using Gauss-Newton Krylov method (see the
+% Krylov tolerance threshold below). 
 %
 %
 % Requirements: 
@@ -94,15 +97,16 @@ function [u,errAll] = PRIMOR_CT(TParameters,G,f,R,N,uref,mu,lambda,gamma,alpha,b
 h       = figure;
 hw      = waitbar(0);
 
+tolKrylov   = 1e-2;  % Krylov convergence criterion, the smaller the value
+                     % the higher the precission for solving the linear system     
+
+
 % Wavelab WT parameters
 L = 3;
 qmf         = MakeONFilter('Symmlet',8);
 NPadMax     = 2^ceil(log(N(1))/log(2));
 NPad        = round((NPadMax-N(1))/2);
 indPad      = NPad+1:NPadMax-NPad;
-
-tolKrylov   = 1e-2;  % Krylov convergence criterion, the smaller the value
-                     % the higher the precission for solving the linear system     
 
 dimIm       = N;
 rows        = N(1);

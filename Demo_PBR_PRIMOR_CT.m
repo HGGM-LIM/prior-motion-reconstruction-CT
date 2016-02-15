@@ -104,12 +104,11 @@
 % geom        = fbp2(cg, ig);
 
 % FORWARD OPERATOR
-modeLinux       = 'y'; % change to 'y' if IRT software is installed
-if modeLinux     == 'y'
+if 0
     % It requires IRT software
-    % Load Forward Operator
-    load('G_linux','geom','G');   % In Linux system. If it does not work,
-                                  % run the code above        
+    % Load Forward Operator precomputed in Linux system. If it does not
+    % work, run the code above 
+    load('G_linux','geom','G');                                         
 end
 
 % READ SIMULATED DATA 
@@ -263,18 +262,18 @@ end
 % six-fold dose reduction reconstructed with FDK, PBR and PRIMOR methods
 figure;
 subplot(2,2,1);
-imagesc(uTarget(:,:,1)); axis image; axis off; colormap gray;
+imagesc(uTarget(:,:,frameThis)); axis image; axis off; colormap gray;
 title('FDK, high dose');
 ca = caxis;
 subplot(2,2,2);
-imagesc(im(:,:,1)*prod(Nd(1:2))/nnz(RAll(:,:,frameThis))); axis image; 
+imagesc(im*prod(Nd(1:2))/nnz(RAll(:,:,frameThis))); axis image; 
 axis off; colormap gray;
 caxis(ca); title('FDK, low dose');
 subplot(2,2,3);
-imagesc(uPbr(:,:,1)); axis image; axis off; colormap gray;
+imagesc(uPbr(:,:,frameThis)); axis image; axis off; colormap gray;
 caxis(ca); title('PBR, low dose');
 subplot(2,2,4);
-imagesc(uPrimor(:,:,1)); axis image; axis off; colormap gray;
+imagesc(uPrimor(:,:,frameThis)); axis image; axis off; colormap gray;
 caxis(ca); title('PRIMOR, low dose');
 
 % Zoom image
@@ -283,17 +282,17 @@ yZoom        = 70:240;
 
 figure;
 subplot(2,2,1);
-imagesc(uTarget(xZoom,yZoom,1)); axis image; axis off; colormap gray;
+imagesc(uTarget(xZoom,yZoom,frameThis)); axis image; axis off; colormap gray;
 title('FDK, high dose');
 ca = caxis;
 subplot(2,2,2);
 imagesc(im(xZoom,yZoom,1)*prod(Nd(1:2))/nnz(RAll(:,:,frameThis))); axis image; axis off; colormap gray;
 caxis(ca); title('FDK, low dose');
 subplot(2,2,3);
-imagesc(uPbr(xZoom,yZoom,1)); axis image; axis off; colormap gray;
+imagesc(uPbr(xZoom,yZoom,frameThis)); axis image; axis off; colormap gray;
 caxis(ca); title('PBR, low dose');
 subplot(2,2,4);
-imagesc(uPrimor(xZoom,yZoom,1)); axis image; axis off; colormap gray;
+imagesc(uPrimor(xZoom,yZoom,frameThis)); axis image; axis off; colormap gray;
 caxis(ca); title('PRIMOR, low dose');
 
 % Convergence: solution error vs iteration number

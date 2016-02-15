@@ -25,10 +25,6 @@ function [u,errAll] = PBR_CT(G,f,R,N,uref,mu,lambda,alpha,beta,nBreg,varargin)
 % varargin  = {uTarget} = Gold standard to computer the error and assess
 % convergence
 %
-% Prior-based reconstruction (PBR) method efficiently solved using the
-% Split Bregman formulation. It assumes that a good quality (free of
-% artefacts) prior image is available. The linear system is solved using
-% Gauss-Newton Krylov method.
 %
 % Outputs: 
 %
@@ -37,11 +33,12 @@ function [u,errAll] = PBR_CT(G,f,R,N,uref,mu,lambda,alpha,beta,nBreg,varargin)
 % errAll    = relative solution error norm at each iteration, size nBreg x
 % number of gates
 %
+% 
 % Prior-based reconstruction (PBR) method is efficiently
 % solved using the Split Bregman formulation. It assumes that a good
 % quality (free of artefacts) prior image is available. The linear system
 % in the image reconstruciton step is solved using  Gauss-Newton Krylov
-% method. 
+% method (see the Krylov tolerance threshold below). 
 %
 %
 % Requirements: 
@@ -192,7 +189,7 @@ for outer = 1:nBreg;
     end
     
      % Solution error norm
-    if nargin >= 13
+    if nargin >= 11
         for iw = 1:numTime
             errAll(outer,iw) = norm(reshape(uTarget(:,:,iw)-u(:,:,iw),[],1))...
                 /norm(reshape(uTarget(:,:,iw),[],1));
@@ -212,7 +209,7 @@ for outer = 1:nBreg;
         tmp     = IWT2_PO(tmp,L,qmf);
         tmp     = tmp(indPad,indPad);
         imagesc(tmp); colorbar; axis image; title(['w, sparsity % ' num2str(100*nnz(dv(:,:,1))/(NPadMax*NPadMax))]);
-        if nargin >= 13
+        if nargin >= 11
             subplot(2,2,4); plot(errAll(1:outer,:)); axis tight; title(['Sol. error' ]);
         end
         colormap gray;
