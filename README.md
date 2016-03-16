@@ -1,5 +1,5 @@
 # prior-motion-reconstruction-CT
-This repository contains data, code and results for prior- and motion-based reconstruction (PRIMOR) method for respiratory gated CT presented in the paper **A novel prior- and motion-based compressed sensing methods for small-animal respiratory gated CT. JFPJ Abascal, M Abella, E Marinetto, J Pascau, and M Desco. Plos One, 2016 (in press).** DOI: 
+This repository contains data, code and results for prior- and motion-based reconstruction (PRIMOR) method for respiratory gated CT presented in the paper **A novel prior- and motion-based compressed sensing methods for small-animal respiratory gated CT. JFPJ Abascal, M Abella, E Marinetto, J Pascau, and M Desco. PLOS ONE 9;11(3):e0149841, 2016.** DOI: http://dx.doi.org/10.1371/journal.pone.0149841
 
 We propose PRIMOR method that extends prior-based reconstruction (PBR) by including a model of the motion between gates. Motion is estimated using a nonrigid registration method based on hierarchical B-splines. PRIMOR solves 
 
@@ -97,5 +97,5 @@ The repository contains the following files:
 
 - **ResGat_LowDose_120p_07I0_PRIMOR.gif:** Video of images reconstructed with PRIMOR using a low dose protocol
 
-If you use this code, please reference the publication JFPJ Abascal et al. A novel prior- and motion-based compressed sensing method for small-animal respiratory gated CT. Plos One, 2016 (in press). If you need to contact the author, please do so at mabella@hggm.es, juanabascal78@gmail.com
+If you use this code, please reference the publication JFPJ Abascal et al. A novel prior- and motion-based compressed sensing method for small-animal respiratory gated CT. PLOS ONE 9;11(3):e0149841, 2016. If you need to contact the author, please do so at mabella@hggm.es, juanabascal78@gmail.com
 
