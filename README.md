@@ -97,5 +97,5 @@ The repository contains the following files:
 
 - **ResGat_LowDose_120p_07I0_PRIMOR.gif:** Video of images reconstructed with PRIMOR using a low dose protocol
 
-If you use this code, please reference the publication JFPJ Abascal et al. A novel prior- and motion-based compressed sensing method for small-animal respiratory gated CT. PLOS ONE 9;11(3):e0149841, 2016. If you need to contact the author, please do so at mabella@hggm.es, juanabascal78@gmail.com
+If you use this code, please reference the publication JFPJ Abascal et al. A novel prior- and motion-based compressed sensing method for small-animal respiratory gated CT. PLOS ONE 9;11(3):e0149841, 2016. Code DOI: http://dx.doi.org/10.5281/zenodo.60798. If you need to contact the author, please do so at mabella@hggm.es, juanabascal78@gmail.com
 
